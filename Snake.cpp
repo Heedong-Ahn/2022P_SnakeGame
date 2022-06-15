@@ -95,10 +95,13 @@ void Snake::moveHead(){
       {
           wholebody.insert(wholebody.begin(), Position(wholebody[0].x, wholebody[0].y + 1));
       }
-      if (isGrow != false)
+
+
+      if (isGrow == false)
       {
           CutTail();
       }
+
       else
       {
           isGrow = false;
