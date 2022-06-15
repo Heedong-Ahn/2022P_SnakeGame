@@ -8,6 +8,8 @@
 using namespace std;
 
 extern Snake *snake;
+map *m;
+Snake *snake;
 
 int main(){
 
@@ -15,24 +17,23 @@ int main(){
   // WINDOW *winMission;
 
 
-  // initscr();
-  // resize_term(60,60);
-  // start_color();
-  // init_pair(1, COLOR_BLACK, COLOR_WHITE);
-  //
-  // refresh();
-  // getch();
-  //
-  // int width = 50;
-  // int height = 23;
+  initscr();
+  resize_term(60,60);
+  start_color();
+  init_pair(1, COLOR_BLACK, COLOR_WHITE);
 
-  // Snake *snake;
-  // map *m;
-  //
-  // m = new map();
-  // snake = new Snake();
-  //
-  // snake->makeBody();
+  refresh();
+  getch();
+
+  int width = 50;
+  int height = 23;
+
+
+
+  m = new map();
+  snake = new Snake();
+
+  snake->makeBody();
 
 
   //initialize map
@@ -40,52 +41,90 @@ int main(){
   // 2 == immune wall
   // 1 == wall
   // 0 == nothing
-  // for (int i = 0; i < HEIGHT; i++)
-  //   {
-  //     for (int j = 0; j < WIDTH; j++)
-  //     {
-  //       switch (m->data[i][j])
-  //       {
-  //       case '0':
-  //         mvaddch(i, j, ' ');
-  //         break;
-  //       case '1':
-  //         mvaddch(i, j, '-');
-  //         break;
-  //       case '2':
-  //         mvaddch(i, j, 'X');
-  //         break;
-  //       case '3':
-  //         mvaddch(i, j, 'H');
-  //         break;
-  //       case '4':
-  //         mvaddch(i, j, 'B');
-  //         break;
-  //       case '5':
-  //         mvaddch(i, j, 'G');
-  //         break;
-  //       case '6':
-  //         mvaddch(i, j, 'P');
-  //         break;
-  //       case '7':
-  //         mvaddch(i, j, '?');
-  //         break;
-  //       case '8':
-  //         mvaddch(i, j, ' ');
-  //       }
-  //     }
-  //   }
-  // refresh();
-  GameScene *gameScene;
-  gameScene = new GameScene();
-  gameScene->Render();
+  snake->moveHead();
+  snake->PushData();
+  for (int i = 0; i < HEIGHT; i++)
+    {
+      for (int j = 0; j < WIDTH; j++)
+      {
+        switch (m->data[i][j])
+        {
+        case '0':
+          mvaddch(i, j, ' ');
+          break;
+        case '1':
+          mvaddch(i, j, '-');
+          break;
+        case '2':
+          mvaddch(i, j, 'X');
+          break;
+        case '3':
+          mvaddch(i, j, 'H');
+          break;
+        case '4':
+          mvaddch(i, j, 'B');
+          break;
+        case '5':
+          mvaddch(i, j, 'G');
+          break;
+        case '6':
+          mvaddch(i, j, 'P');
+          break;
+        case '7':
+          mvaddch(i, j, '?');
+          break;
+        case '8':
+          mvaddch(i, j, ' ');
+        }
+      }
+    }
+  refresh();
+  // GameScene *gameScene;
+  // gameScene = new GameScene();
+  // gameScene->Render();
 
 
   getch();
   for(int k = 0; k < 20; k++){
     snake->moveHead();
     snake->PushData();
-    gameScene->Render();
+    if(snake->isDie == true) break;
+    for (int i = 0; i < HEIGHT; i++)
+      {
+        for (int j = 0; j < WIDTH; j++)
+        {
+          switch (m->data[i][j])
+          {
+          case '0':
+            mvaddch(i, j, ' ');
+            break;
+          case '1':
+            mvaddch(i, j, '-');
+            break;
+          case '2':
+            mvaddch(i, j, 'X');
+            break;
+          case '3':
+            mvaddch(i, j, 'H');
+            break;
+          case '4':
+            mvaddch(i, j, 'B');
+            break;
+          case '5':
+            mvaddch(i, j, 'G');
+            break;
+          case '6':
+            mvaddch(i, j, 'P');
+            break;
+          case '7':
+            mvaddch(i, j, '?');
+            break;
+          case '8':
+            mvaddch(i, j, ' ');
+          }
+        }
+      }
+    refresh();
   }
 
   //scoreboard

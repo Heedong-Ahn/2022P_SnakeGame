@@ -14,7 +14,7 @@ Snake *snake;
 GameScene::GameScene(){
   srand(time(NULL));
 
-  player = new Player();
+  // player = new Player();
 
   //mapManager를 먼저 생성시켜줘야함
   m = new map();

@@ -17,7 +17,7 @@ Snake::~Snake()
 }
 
 void Snake::makeBody(){
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < 4; i++)
   {
       wholebody.push_back(Position(25 + i, 10));
   }
@@ -95,7 +95,7 @@ void Snake::moveHead(){
       {
           wholebody.insert(wholebody.begin(), Position(wholebody[0].x, wholebody[0].y + 1));
       }
-      if (isGrow == false)
+      if (isGrow != false)
       {
           CutTail();
       }
