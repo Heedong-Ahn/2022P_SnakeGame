@@ -97,7 +97,7 @@ void GameScene::Render()
 //   }
 //
 //   player->SetLengthScore(snake->entire.size());
-//   player->SetTotalScore(stage->nowStage);
+//   player->SetTotalScore(stage->nowStage);ㅋ
 //
 //   snake->Update(eTime);
 //   if (snake->IsCollision())
