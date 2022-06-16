@@ -2,6 +2,12 @@
 #pragma once
 #include <ncurses.h>
 #include <vector>
+#include <chrono>
+#include <ctime>
+#include <unistd.h>
+#include <cmath>
+#include <stdlib.h>
+#include "ItemMaker.h"
 #include "map.h"
 #include "Position.h"
 
@@ -17,6 +23,7 @@ public:
   void CutTail();
 
   void moveHead();
+  inline bool kbhit(void);
 
   // void setDirection();
 
@@ -24,6 +31,10 @@ public:
   bool isDie;
   char direction;
   bool isGrow;
+  int bodyLength;
+  int growScore;
+  int poisonScore;
+  int gateScore;
 
   //def score
 };
