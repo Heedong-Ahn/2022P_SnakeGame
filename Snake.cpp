@@ -14,10 +14,10 @@ Snake::Snake()
     direction = 'l';
     isDie = false;
     isGrow = false;
-    int bodyLength = 5;
-    int growScore = 0;
-    int poisonScore = 0;
-    int gateScore = 0;
+    bodyLength = 5;
+    growScore = 0;
+    poisonScore = 0;
+    gateScore = 0;
     makeBody();
 }
 

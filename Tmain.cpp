@@ -131,28 +131,29 @@ void setScreen() {
 int main(){
 
   // initscr();
-  // resize_term(60,60);
+  // resize_term(100,60);
   // start_color();
   // init_pair(1, COLOR_BLACK, COLOR_WHITE);
 
-  // WINDOW *scoreWin;
+  // // WINDOW *scoreWin;
   // WINDOW *guideWin;
 
-  // scoreWin = newwin(5, 10, 40, 40);
+  // // scoreWin = newwin(5, 10, 40, 40);
   
 
 
 
   // refresh();
   // // int ch;
-  // guideWin = newwin(60, 60, 0, 0);
+  // guideWin = newwin(3, 30, 10, 20);
   // wbkgd(guideWin, COLOR_PAIR(1));
   // wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
   // mvwprintw(guideWin, 1, 1, "Are you ready to start?");
-  // // wrefresh(guideWin);
+  // wrefresh(guideWin);
+
   
-  // if(getch()){
-  //   // delwin(guideWin);
+  // if(getch() == 'y'){
+  //   delwin(guideWin);
   //   setScreen();
   // }
 
@@ -167,15 +168,16 @@ int main(){
 
   m = new map();
   stage = new Stage();
-  m->drawScreen();
   snake = new Snake();
   gItem = new ItemMaker('G');
   pItem = new ItemMaker('P');
   gate = new GateController();
+
+  m->drawScreen();
   
   // m->getMap();
-/*
-  getch();
+
+  // getch();
   while(true){
     
 
@@ -186,6 +188,7 @@ int main(){
 
     snake->moveHead();
     snake->PushData();
+    m->update();
     
     // mvprint(30, 60, snake->growScore);
     // mvprint(35, 60, snake->poisonScore);
@@ -225,10 +228,10 @@ int main(){
           }
         }
       }
-    refresh();
+    // refresh();
   }
-*/
-  getch();
+
+
 
   endwin();
   return 0;

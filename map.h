@@ -14,7 +14,9 @@ public:
 
   void *getData();
   void PatchData(int y, int x, char patchData);
-
+  void getMap();
+  void update();
+  void drawScreen();
 
   char data[HEIGHT][WIDTH];
 };
