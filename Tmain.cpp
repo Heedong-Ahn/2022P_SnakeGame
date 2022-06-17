@@ -9,6 +9,7 @@
 #include "GameScene.h"
 #include "ItemMaker.h"
 #include "GateController.h"
+#include "Stage.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ Snake *snake;
 ItemMaker *gItem;
 ItemMaker *pItem;
 GateController *gate;
+Stage *stage;
 
 float getMakeTime(std::chrono::steady_clock::time_point startTime){
   auto endTime = std::chrono::steady_clock::now();
@@ -26,18 +28,136 @@ float getMakeTime(std::chrono::steady_clock::time_point startTime){
   return Time;
 }
 
+void setScreen() {
+  // WINDOW *winGameZone;
+  WINDOW *winScore;
+  WINDOW *winMission;
+
+  // setlocale(LC_ALL, ""); // using Unicode
+
+  // initscr();
+  // resize_term(80,60);
+  // start_color();
+  // init_pair(1, COLOR_BLACK, COLOR_WHITE);
+
+  // border('*','*','*','*','*','*','*','*');
+  // refresh();
+  // getch();
+
+  int width = 60;
+  // int height = 60;
+
+  // // SnakeHead sh(width/2, height/2);
+
+  // winGameZone = newwin(height,width, 1, 1);
+  // wbkgd(winGameZone, COLOR_PAIR(1));
+  // wattron(winGameZone, COLOR_PAIR(1));
+  // //initialize map
+  // // 3 == SnakeHead;
+  // // 2 == immune wall
+  // // 1 == wall
+  // // 0 == nothing
+  // for(int i = 0; i < width; i++){
+  //   for(int j = 0; j < height; j++){
+  //     if(i == 0 || i == width-1 || j ==0 || j == height-1){
+  //       if( (i == j) || (i==0 && j==height-1) ||  (i == width-1 && j == 0) ){
+  //         mvwprintw(winGameZone, j, i, "2");
+  //       }
+  //       else{
+  //         mvwprintw(winGameZone, j, i, "1");
+  //       }
+  //     }
+  //     else{
+  //       mvwprintw(winGameZone, j, i, "0");
+  //     }
+  //   }
+  // }
+  // mvwprintw(winGameZone, 10, 10, "3");
+
+  // wrefresh(winGameZone);
+
+  // getch();
+  // for(int k = 0; k < 20; k++){
+  //   if(sh.moveHead()){
+  //     for(int i = 0; i < width; i++){
+  //       for(int j = 0; j < height; j++){
+  //         if(i == 0 || i == width-1 || j ==0 || j == height-1){
+  //           if( (i == j) || (i==0 && j==height-1) ||  (i == width-1 && j == 0) ){
+  //             mvwprintw(winGameZone, j, i, "2");
+  //           }
+  //           else{
+  //             mvwprintw(winGameZone, j, i, "1");
+  //           }
+  //         }
+  //         else{
+  //           mvwprintw(winGameZone, j, i, "0");
+  //         }
+  //       }
+  //     }
+  //     mvwprintw(winGameZone, sh.getY(), sh.getX(), "3");
+  //     wrefresh(winGameZone);
+  //   }else{
+  //     delwin(winScore);
+  //     delwin(winMission);
+  //     endwin();
+  //   }
+  // }
+
+
+  // for(int k = 0; k < 20; k++){
+  //   sh.moveHead();
+  //   for(int i = 0; i < width; i++){
+  //     for(int j = 0; j < height; j++){
+  //       if(i == 0 || i == width-1 || j ==0 || j == height-1){
+  //         if( (i == j) || (i==0 && j==height-1) ||  (i == width-1 && j == 0) ){
+  //           mvwprintw(winGameZone, j, i, "2");
+  //         }
+  //         else{
+  //           mvwprintw(winGameZone, j, i, "1");
+  //         }
+  //       }
+  //       else{
+  //         mvwprintw(winGameZone, j, i, "0");
+  //       }
+  //     }
+  //   }
+  //   mvwprintw(winGameZone, sh.getY(), sh.getX(), "3");
+  //   wrefresh(winGameZone);
+  // }
+
+
+}
+
 int main(){
 
-  initscr();
-  resize_term(60,60);
-  start_color();
-  init_pair(1, COLOR_BLACK, COLOR_WHITE);
+  // initscr();
+  // resize_term(60,60);
+  // start_color();
+  // init_pair(1, COLOR_BLACK, COLOR_WHITE);
 
-  refresh();
-  getch();
+  // WINDOW *scoreWin;
+  // WINDOW *guideWin;
 
-  int width = 50;
-  int height = 23;
+  // scoreWin = newwin(5, 10, 40, 40);
+  
+
+
+
+  // refresh();
+  // // int ch;
+  // guideWin = newwin(60, 60, 0, 0);
+  // wbkgd(guideWin, COLOR_PAIR(1));
+  // wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
+  // mvwprintw(guideWin, 1, 1, "Are you ready to start?");
+  // // wrefresh(guideWin);
+  
+  // if(getch()){
+  //   // delwin(guideWin);
+  //   setScreen();
+  // }
+
+  // int width = 50;
+  // int height = 23;
 
   std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
@@ -46,17 +166,18 @@ int main(){
 
 
   m = new map();
+  stage = new Stage();
+  m->drawScreen();
   snake = new Snake();
   gItem = new ItemMaker('G');
   pItem = new ItemMaker('P');
   gate = new GateController();
-
-  // gate->placeGates();
-  // gate->lastMakeTime = getMakeTime(startTime);
-
+  
+  // m->getMap();
+/*
   getch();
   while(true){
-
+    
 
     pItem->Making(getMakeTime(startTime));
     gItem->Making(getMakeTime(startTime));
@@ -106,7 +227,7 @@ int main(){
       }
     refresh();
   }
-
+*/
   getch();
 
   endwin();

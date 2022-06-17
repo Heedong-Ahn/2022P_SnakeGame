@@ -29,7 +29,7 @@ void ItemMaker::Making(float Time){
   //make part
   if(itemVector.size() < 3 && Time - lastMakeTime > 3.0f){
     Position pos = getRandomPosition();
-    itemVector.push_back(Item(pos.y,pos.x, Time));
+    itemVector.push_back(Item(pos.x,pos.y, Time));
     for(int i = 0; i < itemVector.size(); i++){
       if(this->Type == 'G'){
         m->PatchData(itemVector[i].y, itemVector[i].x, '5');
