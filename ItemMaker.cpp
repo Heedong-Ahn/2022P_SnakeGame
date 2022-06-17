@@ -15,7 +15,7 @@ Position ItemMaker::getRandomPosition(){
   while (1){
     int x = rand() % (WIDTH);
     int y = rand() % (HEIGHT);
-    if (m->data[x][y] == '0')
+    if (m->data[y][x] == '0')
     {
         p.x = x;
         p.y = y;

@@ -8,6 +8,8 @@
 #include "Snake.h"
 #include "GameScene.h"
 #include "ItemMaker.h"
+#include "GateController.h"
+
 using namespace std;
 
 
@@ -15,6 +17,7 @@ map *m;
 Snake *snake;
 ItemMaker *gItem;
 ItemMaker *pItem;
+GateController *gate;
 
 float getMakeTime(std::chrono::steady_clock::time_point startTime){
   auto endTime = std::chrono::steady_clock::now();
@@ -46,7 +49,10 @@ int main(){
   snake = new Snake();
   gItem = new ItemMaker('G');
   pItem = new ItemMaker('P');
+  gate = new GateController();
 
+  // gate->placeGates();
+  // gate->lastMakeTime = getMakeTime(startTime);
 
   getch();
   while(true){
@@ -54,12 +60,14 @@ int main(){
 
     pItem->Making(getMakeTime(startTime));
     gItem->Making(getMakeTime(startTime));
+    gate->Making(getMakeTime(startTime));
+
 
     snake->moveHead();
     snake->PushData();
-
-    mvprint(30, 60, snake->growScore);
-    mvprint(35, 60, snake->poisonScore);
+    
+    // mvprint(30, 60, snake->growScore);
+    // mvprint(35, 60, snake->poisonScore);
     if(snake->isDie == true) break;
     for (int i = 0; i < HEIGHT; i++)
       {

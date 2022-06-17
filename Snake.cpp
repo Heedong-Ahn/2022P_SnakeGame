@@ -1,10 +1,13 @@
 //Snake.cpp
+#include <iostream>
 #include "Snake.h"
 #include "map.h"
+#include "GateController.h"
 
 extern map *m;
 extern ItemMaker *gItem;
 extern ItemMaker *pItem;
+extern GateController *gate;
 
 Snake::Snake()
 {
@@ -147,6 +150,24 @@ void Snake::moveHead(){
         CutTail();
         bodyLength--;
         poisonScore++;
+      }
+
+      // entering gate
+      if(m->data[wholebody[0].y][wholebody[0].x] == '7'){
+        gate->isEntering = true;
+        Position newPos = gate->passGates();
+        wholebody[0].x = newPos.y;
+        wholebody[0].y = newPos.x;
+        gateScore++;
+        gate->gateChgCnt = wholebody.size();
+      }
+
+      // tail exiting gate
+      if(gate->isEntering){
+        if(gate->gateChgCnt == wholebody.size()){
+          gate->isEntering = false;
+        }
+        gate->gateChgCnt++;
       }
 
       if(wholebody.size() <= 3){
