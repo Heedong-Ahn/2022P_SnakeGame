@@ -57,8 +57,9 @@ void map::update(){
   mvwprintw(winScore, 5, 1, "G: %d", snake->gateScore);
  
   if(stage->goalBodyLength <= snake->bodyLength){
-    if(stage->goalBodyLength == snake->bodyLength)
-      stage->goalCnt++;
+    // if(stage->goalBodyLength == snake->bodyLength)
+    //   stage->goalCnt++;
+    stage->bodyDone = true;
     mvwprintw(winMission, 2, 1, "B: %d (%s)", stage->goalBodyLength, "V");
     
   }else{
@@ -67,8 +68,9 @@ void map::update(){
   }
 
   if(stage->goalGrowScore <= snake->growScore){
-    if(stage->goalGrowScore == snake->growScore)
-      stage->goalCnt++;
+    // if(stage->goalGrowScore == snake->growScore)
+    //   stage->goalCnt++;
+    stage->growDone = true;
     mvwprintw(winMission, 3, 1, "+: %d (%s)", stage->goalGrowScore, "V");
     
   }else{
@@ -77,8 +79,9 @@ void map::update(){
   }
 
   if(stage->goalPoisonScore <= snake->poisonScore){
-    if(stage->goalPoisonScore == snake->poisonScore)
-      stage->goalCnt++;
+    // if(stage->goalPoisonScore == snake->poisonScore)
+    //   stage->goalCnt++;
+    stage->poisonDone = true;
     mvwprintw(winMission, 4, 1, "-: %d (%s)", stage->goalPoisonScore, "V");
     
   }else{
@@ -87,8 +90,9 @@ void map::update(){
   }
 
   if(stage->goalGateScore <= snake->gateScore){
-    if(stage->goalGateScore == snake->gateScore)
-      stage->goalCnt++;
+    // if(stage->goalGateScore == snake->gateScore)
+    //   stage->goalCnt++;
+    stage->gateDone = true;
     mvwprintw(winMission, 5, 1, "G: %d (%s)", stage->goalGateScore, "V");
     
   }else{
@@ -99,19 +103,21 @@ void map::update(){
   wrefresh(winScore);
   wrefresh(winMission);
 
-  if(stage->goalCnt == 4){
+  if(stage->bodyDone && stage->growDone && stage->poisonDone && stage->gateDone){
     
-    guideWin = newwin(4, 20, 5, 20);
+    guideWin = newwin(4, 15, 5, 15);
     wbkgd(guideWin, COLOR_PAIR(1));
     wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
     
     if(stage->stageNum != 3){
       mvwprintw(guideWin, 1, 1, "Stage Clear");
+      wrefresh(guideWin);
+      getch();
       stage->levelUp();
     }else{
       mvwprintw(guideWin, 1, 1, "All Stages Complete");
     }
-    wrefresh(guideWin);
+    
 
   }
 
