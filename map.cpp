@@ -51,53 +51,63 @@ void map::getMap() {
 }
 
 void map::update(){
+
+  // if(snake->isDie){
+  //   guideWin = newwin(4, 15, 5, 15);
+  //   wbkgd(guideWin, COLOR_PAIR(1));
+  //   wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
+    
+  //   mvwprintw(guideWin, 1, 1, "Died :( \n Restart? Press 'y' to restart and else to quit");
+  //     wrefresh(guideWin);
+      
+  //     if(getch() == 'y'){
+  //       delwin(guideWin);
+  //       stage->stageNum = 3;
+  //       snake->isDie = false;
+  //       stage->levelUp();
+  //     }else{
+  //       endwin();
+  //     }
+  // }
   mvwprintw(winScore, 2, 1, "B: %d/ %d", snake->bodyLength, stage->goalBodyLength);
   mvwprintw(winScore, 3, 1, "+: %d", snake->growScore);
   mvwprintw(winScore, 4, 1, "-: %d", snake->poisonScore);
   mvwprintw(winScore, 5, 1, "G: %d", snake->gateScore);
  
   if(stage->goalBodyLength <= snake->bodyLength){
-    // if(stage->goalBodyLength == snake->bodyLength)
-    //   stage->goalCnt++;
     stage->bodyDone = true;
     mvwprintw(winMission, 2, 1, "B: %d (%s)", stage->goalBodyLength, "V");
     
   }else{
     mvwprintw(winMission, 2, 1, "B: %d (%s)", stage->goalBodyLength, " ");
-    stage->goalCnt--;
+    stage->goalCnt = false;
   }
 
   if(stage->goalGrowScore <= snake->growScore){
-    // if(stage->goalGrowScore == snake->growScore)
-    //   stage->goalCnt++;
     stage->growDone = true;
     mvwprintw(winMission, 3, 1, "+: %d (%s)", stage->goalGrowScore, "V");
     
   }else{
     mvwprintw(winMission, 3, 1, "+: %d (%s)", stage->goalGrowScore, " ");
-    stage->goalCnt--;
+    stage->goalCnt = false;
   }
 
   if(stage->goalPoisonScore <= snake->poisonScore){
-    // if(stage->goalPoisonScore == snake->poisonScore)
-    //   stage->goalCnt++;
     stage->poisonDone = true;
     mvwprintw(winMission, 4, 1, "-: %d (%s)", stage->goalPoisonScore, "V");
     
   }else{
     mvwprintw(winMission, 4, 1, "-: %d (%s)", stage->goalPoisonScore, " ");
-    stage->goalCnt--;
+    stage->goalCnt = false;
   }
 
   if(stage->goalGateScore <= snake->gateScore){
-    // if(stage->goalGateScore == snake->gateScore)
-    //   stage->goalCnt++;
     stage->gateDone = true;
     mvwprintw(winMission, 5, 1, "G: %d (%s)", stage->goalGateScore, "V");
     
   }else{
     mvwprintw(winMission, 5, 1, "G: %d (%s)", stage->goalGateScore, " ");
-    stage->goalCnt--;
+    stage->gateDone = false;
   }
   
   wrefresh(winScore);
@@ -109,13 +119,15 @@ void map::update(){
     wbkgd(guideWin, COLOR_PAIR(1));
     wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
     
-    if(stage->stageNum != 3){
+    if(stage->stageNum != stage->totalStages){
       mvwprintw(guideWin, 1, 1, "Stage Clear");
       wrefresh(guideWin);
       getch();
       stage->levelUp();
     }else{
       mvwprintw(guideWin, 1, 1, "All Stages Complete");
+      getch();
+      snake->isDie = true;
     }
     
 
