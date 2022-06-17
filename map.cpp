@@ -52,23 +52,6 @@ void map::getMap() {
 
 void map::update(){
 
-  // if(snake->isDie){
-  //   guideWin = newwin(4, 15, 5, 15);
-  //   wbkgd(guideWin, COLOR_PAIR(1));
-  //   wborder(guideWin, '.', '.', '.', '.', '.', '.', '.', '.');
-    
-  //   mvwprintw(guideWin, 1, 1, "Died :( \n Restart? Press 'y' to restart and else to quit");
-  //     wrefresh(guideWin);
-      
-  //     if(getch() == 'y'){
-  //       delwin(guideWin);
-  //       stage->stageNum = 3;
-  //       snake->isDie = false;
-  //       stage->levelUp();
-  //     }else{
-  //       endwin();
-  //     }
-  // }
   mvwprintw(winScore, 2, 1, "B: %d/ %d", snake->bodyLength, stage->goalBodyLength);
   mvwprintw(winScore, 3, 1, "+: %d", snake->growScore);
   mvwprintw(winScore, 4, 1, "-: %d", snake->poisonScore);

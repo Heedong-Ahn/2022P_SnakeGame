@@ -16,11 +16,10 @@ public:
     void Making(float Time);
     Position passGates();
     void pushData();
-    int gateChgCnt = 0;
-
 
     std::vector<Position> gateVector;
     bool isEntering = false;
     float lastMakeTime = 0;
+    int gateChgCnt = 0;
 };
 

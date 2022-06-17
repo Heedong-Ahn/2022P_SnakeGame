@@ -25,8 +25,6 @@ public:
   void moveHead();
   inline bool kbhit(void);
 
-  // void setDirection();
-
   std::vector<Position> wholebody;
   bool isDie;
   char direction;
@@ -36,5 +34,5 @@ public:
   int poisonScore;
   int gateScore;
 
-  //def score
+
 };

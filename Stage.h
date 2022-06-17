@@ -22,10 +22,10 @@ public:
     bool gateDone = false;
     const int totalStages = 4;
     //4 stages 4 missions (body length, grow, poision, gate)
-    int goals[4][4] = {{3, 1, 1, 1}, 
-                    {3, 1, 1, 1},
-                    {3, 1, 1, 1}, 
-                    {3, 1, 1, 1}}; //{6, 2, 2, 2}, {7, 3, 3, 3}, {8, 3, 3, 3}
+    int goals[4][4] = {{5, 1, 1, 1}, 
+                    {6, 2, 2, 2}, 
+                    {7, 3, 3, 3}, 
+                    {8, 3, 3, 3}}; 
     
 
     Stage(){
@@ -38,6 +38,7 @@ public:
     }
     ~Stage(){}
     void levelUp(){
+        // reset scores and goals 
         bodyDone = false;
         growDone = false;
         poisonDone = false;
@@ -52,18 +53,9 @@ public:
         {
             snake->wholebody.push_back(Position(25 + i, 10));
         }
-        if(stageNum == totalStages){
-            // if play again go back to level 0
-            
-            goalBodyLength = goals[0][0];
-            goalGrowScore = goals[0][1];
-            goalPoisonScore = goals[0][2];
-            goalGateScore = goals[0][3];
-            stageNum = 0;
 
-            m->getMap();
-        }else{
-            
+
+        if(stageNum != totalStages){
             goalBodyLength = goals[stageNum][0];
             goalGrowScore = goals[stageNum][1];
             goalPoisonScore = goals[stageNum][2];

@@ -2,7 +2,6 @@
 
 #include "Snake.h"
 #include "GateController.h"
-#include "GameScene.h"
 
 extern map *m;
 extern Snake *snake;
